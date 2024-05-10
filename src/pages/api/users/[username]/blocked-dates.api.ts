@@ -45,7 +45,7 @@ export default async function handle(
     SELECT
       EXTRACT(DAY FROM S.date) AS date,
       COUNT(S.date) AS amount,
-      ((UTI.time_start_in_minutes - UTI.time_end_in_minutes) / 60) AS size
+      ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60) AS size
 
     FROM schedulings S
 
@@ -57,10 +57,12 @@ export default async function handle(
       AND EXTRACT(MONTH from S.date) = ${month}
 
     GROUP BY EXTRACT(DAY FROM S.date),
-      ((UTI.time_start_in_minutes - UTI.time_end_in_minutes) / 60)
+      ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
 
     HAVING amount >= size
   `
+
+  console.log(blockedDatesRaw)
 
   const blockedDates = blockedDatesRaw.map((item) => item.date)
 
