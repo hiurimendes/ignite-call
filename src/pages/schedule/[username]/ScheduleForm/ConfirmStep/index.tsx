@@ -29,7 +29,7 @@ export function ConfirmStep({
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm({
+  } = useForm<ConfirmFormData>({
     resolver: zodResolver(confirmFormSchema),
   })
 
