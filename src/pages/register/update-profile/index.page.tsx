@@ -27,11 +27,7 @@ const updateProfileSchema = z.object({
 type UpdateProfileData = z.infer<typeof updateProfileSchema>
 
 export default function UpdateProfile() {
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<UpdateProfileData>({
+  const { register, handleSubmit } = useForm<UpdateProfileData>({
     resolver: zodResolver(updateProfileSchema),
   })
 

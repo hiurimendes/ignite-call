@@ -63,7 +63,7 @@ const timeIntervalsFormSchema = z.object({
     ),
 })
 
-type TimeIntervalsFormInput = z.input<typeof timeIntervalsFormSchema>
+export type TimeIntervalsFormInput = z.input<typeof timeIntervalsFormSchema>
 
 type TimeIntervalsFormOutput = z.output<typeof timeIntervalsFormSchema>
 
@@ -100,7 +100,7 @@ export default function TimeIntervals() {
 
   const intervals = watch('intervals')
 
-  async function handleSetTimeIntervals(data: any) {
+  async function handleSetTimeIntervals(data: TimeIntervalsFormOutput) {
     const { intervals } = data as TimeIntervalsFormOutput
 
     await api.post('/users/time-intervals', {
