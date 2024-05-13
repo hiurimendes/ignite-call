@@ -8,6 +8,7 @@ export function PrismaAdapter(
   res: NextApiResponse | NextPageContext['res'],
 ): Adapter {
   return {
+    // @ts-expect-error https://github.com/nextauthjs/next-auth/issues/9493#issuecomment-1913353082
     async createUser(user) {
       const { '@ignitecall:userId': userIdOnCookies } = parseCookies({ req })
 
@@ -40,6 +41,7 @@ export function PrismaAdapter(
       }
     },
 
+    // @ts-expect-error https://github.com/nextauthjs/next-auth/issues/9493#issuecomment-1913353082
     async getUser(id) {
       const user = await prisma.user.findUnique({
         where: {
